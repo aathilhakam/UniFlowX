@@ -87,21 +87,15 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
             String jwt = jwtUtils.generateJwtToken(authenticationToken);
 
-<<<<<<< HEAD
-            String targetUrl = UriComponentsBuilder.fromUriString("http://localhost:5174/oauth2/redirect")
+String targetUrl = UriComponentsBuilder.fromUriString("http://localhost:5173/oauth2/redirect")
                     .queryParam("token", jwt)
                     .build().toUriString();
-=======
-        String targetUrl = UriComponentsBuilder.fromUriString("http://localhost:5173/oauth2/redirect")
-                .queryParam("token", jwt)
-                .build().toUriString();
->>>>>>> 5c24315 (make google authentication)
 
             clearAuthenticationAttributes(request, response);
             getRedirectStrategy().sendRedirect(request, response, targetUrl);
         } catch (Exception ex) {
             logger.error("[OAuth2Success] Error during post-login processing: {} | Error Stack Trace:", ex.getMessage(), ex);
-            String errorUrl = UriComponentsBuilder.fromUriString("http://localhost:5174/login")
+            String errorUrl = UriComponentsBuilder.fromUriString("http://localhost:5173/login")
                     .queryParam("error", "Database error or role missing: " + ex.getMessage())
                     .build().toUriString();
             getRedirectStrategy().sendRedirect(request, response, errorUrl);
